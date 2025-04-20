@@ -1,39 +1,31 @@
-output "elastic_ip" {
-  value = module.vpc.elastic_ip
+output  "vpc_id" {
+  value       = aws_vpc.main.id
 }
 
-output "pub_route_id" {
-  value = module.vpc.pub_route_id
-}
-output "pri_route_id" {
-  value = module.vpc.pri_route_id
-}
-output "db_route_id" {
-  value = module.vpc.db_route_id
-}
-output "default_vpc_id" {
-  value = module.vpc.default_vpc_id
-}
-output "default_vpc_cidr_block" {
-  value = module.vpc.default_vpc_cidr_block
-}
-output "vpc_id" {
-  value = module.vpc.vpc_id
-}
-output "public_subnet_ids" {
-  value = module.vpc.public_subnet_ids
-  }
-
-output "private_subnet_ids" {
-  value = module.vpc.private_subnet_ids
+output "public_subnet_ids"{
+  value = aws_subnet.public[*].id
 }
 
-output "database_subnet_ids" {
-  value = module.vpc.database_subnet_ids
+output "private_subnet_ids"{
+  value = aws_subnet.private[*].id
 }
-output "gw_id" {
-  value = module.vpc.gw_id
+
+output "database_subnet_ids"{
+  value = aws_subnet.database[*].id
 }
-output "db_subnet_group" {
-  value = module.vpc.db_subnet_group
+
+output "database_subnet_group_name"{
+  value = aws_db_subnet_group.default.name
 }
+
+# output "az_info" {
+#     value = data.aws_availability_zones.available
+# }
+
+# output "default_vpc_info" {
+#   value = data.aws_vpc.default
+# }
+
+# output "main_route_table_info" {
+#   value = data.aws_route_table.main
+# }
