@@ -1,0 +1,66 @@
+pipeline{
+
+    agent any
+    options {
+        timeout(time:30 , unit : 'MINUTES')
+        disableConcurrentBuilds()
+    }
+    parameters {
+        
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+    }
+    stages {
+        stage('inti') {
+            steps {
+                scipt{
+                     withAWS(region: 'us-east-1', credentials: 'aws-cred'){
+                      sh """
+                      cd 00-vpc
+                      terraform init -reconfigure
+                      terraform plan
+                      """
+                     }
+               
+                }
+                
+            }
+        }
+        stage('apply') {
+            
+            steps {
+               scipt{
+                     withAWS(region: 'us-east-1', credentials: 'aws-cred'){
+                      sh """
+                      cd 00-vpc
+                      terraform apply -auto-approve
+                      """
+                     }
+               }
+            }
+        }
+        
+        
+    }  
+    post {
+        always{
+            echo "This section runs always"
+            deleteDir()
+        }
+        success{
+            echo "This section run when pipeline success"
+        }
+        failure{
+            echo "This section run when pipeline failure"
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
