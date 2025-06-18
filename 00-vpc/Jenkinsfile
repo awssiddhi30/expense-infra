@@ -12,7 +12,7 @@ pipeline{
     stages {
         stage('inti') {
             steps {
-                scipt{
+                script{
                      withAWS(region: 'us-east-1', credentials: 'aws-cred'){
                       sh """
                       cd 00-vpc
@@ -28,7 +28,7 @@ pipeline{
         stage('apply') {
             
             steps {
-               scipt{
+               script{
                      withAWS(region: 'us-east-1', credentials: 'aws-cred'){
                       sh """
                       cd 00-vpc
