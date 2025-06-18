@@ -8,10 +8,10 @@ variable "environment" {
 }
 
 variable "domain" {
-  default = "devopslearning.fun"
+  default = "daws30.online"
 
 }
 
 variable "zone_id" {
-  default = "Z0592130EBEMYAQIQAFO"
+  default = "Z07444372T38Z6YXK17CJ"
 }
